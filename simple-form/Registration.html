@@ -5,6 +5,55 @@
     <title></title>
 </head>
 <body>
+    <h1>Форма регистрации</h1>
+    <form action ="/Echo" method ="post">
+        <label for="first-name-field">First name:</label>
+        <input type ="text" name ="first-name" id ="first-name-field"/>
 
+        <label for="last-name-field">Last name:</label>
+        <input type ="text" name="last-name" id ="last-name-field" />
+
+        <label for="email-field">Email:</label>
+        <input type ="email" name="email" id ="email-field" />
+
+        <label for="password-field">Password:</label>
+        <input type="password" name="password" id="password-field" />
+
+        <label for="password-repeat-field">Repeat password:</label>
+        <input type="password" name="password-repeat" id="password-repeat-field" />
+
+        <label>Birthday:</label>
+        <input type="number" min="1" max="31" name ="day"/>
+        <select name="month">
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+        </select>
+        <input type="number" min="1950" max="2015" name="year"/>
+
+        <label for="telephone-field">Telephone:</label>
+        <input type="tel" name="telephone" id="telephone-field"/>
+
+        Choose one:
+        <input type="radio" name="question" value=""/>Watermelon
+        <input type="radio" name="question" value=""/>Beaver
+        <input type="radio" name="question" value=""/>Lightbulb
+
+        <textarea name="comment" id="comment-field" rows="5">Some comment</textarea>
+
+        <input type="checkbox" name="remember-me" checked/>
+        Remember me
+
+        <input type="submit" value="Register"/>
+    </form>
 </body>
 </html>
