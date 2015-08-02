@@ -1,0 +1,27 @@
+.pad10{
+    padding-left: 10%;
+}
+
+.birthday-flex{
+    display: flex;
+    justify-content: space-between;
+    //flex-wrap: wrap;
+}
+
+.birthday-flex .day{
+    width: 20%;
+    min-width: 40px;
+}
+
+.birthday-flex .year{
+    width: 25%;
+    min-width: 60px;
+}
+
+.birthday-flex input, .birthday-flex select{
+    padding: 5px;
+}
+
+.col-xs-5{
+    min-width: 230px;
+}
