@@ -37,7 +37,7 @@ function sendAJAXRequest() {
     
     var xhr = new XMLHttpRequest();
     
-    xhr.open("post", "/Home/Echo/send", true);
+    xhr.open("post", "/Home/Echo/send?"+  (new Date()).getTime(), true);
     //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     
     xhr.addEventListener("readystatechange", function() {
