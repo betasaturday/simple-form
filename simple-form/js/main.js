@@ -3,7 +3,7 @@
     submit.addEventListener("click",
         function (e) {
             e.preventDefault();
-            sendAJAXRequest(getQueryString());
+            sendAJAXRequest();
         });
 })();
 
@@ -31,17 +31,20 @@ function getQueryString() {
     return queryString;
 }
 
-function sendAJAXRequest(qs) {
+function sendAJAXRequest() {
+    var form = document.querySelector("form");
+    var data = new FormData(form);
+    
     var xhr = new XMLHttpRequest();
     
     xhr.open("post", "/Home/Echo/send", true);
-    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     
     xhr.addEventListener("readystatechange", function() {
         if (xhr.readyState == 4) {
             console.log(xhr.responseText);
         }
     });
-    
-    xhr.send(qs);
+    console.log(data.toString());
+    xhr.send(data);
 }
