@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -18,7 +18,7 @@
 <body class="container">
 
     <h1 class="pad10">Registration form</h1>
-    <form action="/Home/Echo" method="post" role="form" class="form-horizontal">
+    <form action="/Home/Echo" method="post" enctype="multipart/form-data" role="form" class="form-horizontal">
         <div class="form-group">
             <label for="first-name-field" class="col-xs-3 col-sm-2 control-label text-right">First name:</label>
             <div class="col-xs-5 col-sm-4 col-lg-3">
@@ -131,17 +131,45 @@
                 </div>
             </div>
         </div>
-
+        
+        <div class="form-group">
+            <div class="col-xs-9 col-sm-6 pad10">
+                <input type="file" name="images" id="upload_photo" multiple>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <div class="col-xs-9 col-sm-6 pad10">
+                <ul class="upload-images">
+                </ul>
+             </div>
+        </div>
+        
         <div class="pad10">
             <input type="reset" class="btn btn-warning" value="Reset" />
             <input type="submit" class="btn btn-primary" value="Register" />
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+
     </form>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script id  = "image-item" type="text/html">
+        <li class = "image-item">
+            <div class = "image">
+                <img src = "{{image}}" alt = "{{name}}" title = "{{name}}">
+            </div>
+            <div class = "del-x">
+                <a href = "#" class="del-link" title="delete">
+                    x
+                </a>
+            </div>
+        </li>
+    </script>
+    
 </body>
 
 </html>

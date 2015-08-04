@@ -1,10 +1,57 @@
+var queue = [];
+
 (function () {
     var submit = document.querySelector("input[type=submit]");
+    
     submit.addEventListener("click",
         function (e) {
             e.preventDefault();
             sendAJAXRequest();
         });
+    document.querySelector("#upload_photo").addEventListener("change", function() {
+        var files = this.files;
+        for (var i = 0; i < files.length; ++i) {
+            preview(files[i]);
+        }
+
+        this.value = "";
+    });
+    
+    function preview(file) {
+        var area = document.querySelector(".upload-images");
+        var template = document.querySelector("#image-item").innerHTML;
+        
+        if (file.type.match(/image.*/)) {
+            var reader = new FileReader();
+            reader.addEventListener("load", function(event) {
+                var htmlImage = template.replace("{{image}}", event.target.result);
+                htmlImage = htmlImage.replace("{{name}}", file.name);
+                
+                area.innerHTML += htmlImage;
+                
+                var currentLi = area.querySelector("li:last-child");
+                queue.push({file: file, li: currentLi});
+                
+                var links = area.querySelectorAll(".del-link");
+                for (var i = 0; i < links.length; ++i)
+                {
+                    a = links[i];
+                    (function(a){
+                    a.addEventListener("click", function(e){
+                        e.preventDefault();
+                        removePreview(a.parentNode.parentNode);
+                    });
+                    //console.log(a.parentNode.parentNode);
+                    
+                    })(a);
+                }
+               
+                
+            }, false);
+            reader.readAsDataURL(file);
+        }    
+    }
+    
 })();
 
 function getQueryString() {
@@ -35,6 +82,12 @@ function sendAJAXRequest() {
     var form = document.querySelector("form");
     var data = new FormData(form);
     
+    console.log(queue.length);
+    queue.forEach(function(element) {
+        data.append(element.file.name, element.file);
+        console.log(element.file.name);
+     });
+    
     var xhr = new XMLHttpRequest();
     
     xhr.open("post", "/Home/Echo/send?"+  (new Date()).getTime(), true);
@@ -45,6 +98,13 @@ function sendAJAXRequest() {
             console.log(xhr.responseText);
         }
     });
-    console.log(data.toString());
+
     xhr.send(data);
+}
+
+function removePreview(li) {
+    queue.filter(function(element){
+        return element.li != li;
+    });
+    li.parentNode.removeChild(li);
 }
